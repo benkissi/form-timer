@@ -9,7 +9,7 @@ function App() {
   const [name, setName] = useState("");
   const [institution, setInstitution] = useState("");
   const [bio, setBio] = useState("");
-  const [disabled, setDisabled] = useState(true)
+  const [disabled, setDisabled] = useState(true);
 
   const [duration, setDuration] = useState(0);
   const [timer, setTimer] = useState(null);
@@ -64,21 +64,21 @@ function App() {
       }, 1000)
     );
 
-    setDisabled(false)
-  }
+    setDisabled(false);
+  };
 
   const resetFields = () => {
     setName("");
     setInstitution("");
     setBio("");
     setDuration(0);
-    setDisabled(true)
+    setDisabled(true);
   };
 
   const handleSubmit = () => {
     const isValid = name && institution && bio;
 
-    if(disabled) {
+    if (disabled) {
       setError("Start timer");
       return;
     }
@@ -95,38 +95,50 @@ function App() {
     resetFields();
   };
 
+  const handleInputClick = () => {
+    if (disabled) {
+      setError("Start timer");
+      return;
+    }
+  };
+
   return (
     <div className={styles.app}>
       <div className={styles.title}>Duration: {duration} seconds</div>
       <p>How long will it take you to fill the form</p>
       <p className={styles.error}>{formError}</p>
       <div className={styles.form}>
-        <Input
-          name="name"
-          disabled={disabled}
-          label="Name"
-          handleChange={onChangeHandler}
-          value={name}
-        />
-        <Input
-          name="institution"
-          disabled={disabled}
-          label="Institution"
-          handleChange={onChangeHandler}
-          value={institution}
-        />
-        <TextArea
-          name="bio"
-          disabled={disabled}
-          label="Bio"
-          handleChange={onChangeHandler}
-          value={bio}
-        />
+        <div onClick={handleInputClick}>
+          <Input
+            name="name"
+            disabled={disabled}
+            label="Name"
+            handleChange={onChangeHandler}
+            value={name}
+          />
+        </div>
+        <div onClick={handleInputClick}>
+          <Input
+            name="institution"
+            disabled={disabled}
+            label="Institution"
+            handleChange={onChangeHandler}
+            value={institution}
+          />
+        </div>
+        <div onClick={handleInputClick}>
+          <TextArea
+            name="bio"
+            disabled={disabled}
+            label="Bio"
+            handleChange={onChangeHandler}
+            value={bio}
+          />
+        </div>
         <div className={styles.button_container}>
           <Button text="Submit" handleClick={handleSubmit} />
           <p onClick={startTimer}>Start timer</p>
         </div>
-        
       </div>
     </div>
   );
