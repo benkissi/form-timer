@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Input from "./components/input";
 import TextArea from "./components/textarea";
-import Button from "./components/button"
-
+import Button from "./components/button";
 
 import styles from "./App.module.css";
 
@@ -17,14 +16,12 @@ function App() {
   const [formError, setError] = useState("");
 
   useEffect(() => {
-    setTimer(
-      setInterval(() => {
-        setDuration((prevState) => prevState + 1);
-      }, 1000)
-    );
+    if (!timer) {
+      startTimer()
+    }
 
     return () => clearInterval(timer);
-  }, []);
+  }, [timer]);
 
   useEffect(() => {
     let timeOut;
@@ -59,6 +56,14 @@ function App() {
     clearInterval(timer);
   };
 
+  const startTimer = () => {
+    setTimer(
+      setInterval(() => {
+        setDuration((prevState) => prevState + 1);
+      }, 1000)
+    );
+  }
+
   const resetFields = () => {
     setName("");
     setInstitution("");
@@ -84,6 +89,7 @@ function App() {
   return (
     <div className={styles.app}>
       <div className={styles.title}>Duration: {duration} seconds</div>
+      <p>How long will it take you to fill the form</p>
       <p className={styles.error}>{formError}</p>
       <div className={styles.form}>
         <Input
@@ -105,9 +111,10 @@ function App() {
           value={bio}
         />
         <div className={styles.button_container}>
-
-        <Button text="Submit" handleClick={handleSubmit}/>
+          <Button text="Submit" handleClick={handleSubmit} />
+          <p onClick={startTimer}>Start timer</p>
         </div>
+        
       </div>
     </div>
   );
