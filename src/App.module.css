@@ -1,0 +1,38 @@
+* {
+  box-sizing: border-box;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.form button {
+  margin-top: 10px;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 30px;
+  color: teal;
+}
+
+.error {
+  color: tomato;
+  font-size: 14px;
+}
+
+.button_container {
+  display: flex;
+  width: 100%;
+  margin-top: 20px;
+}

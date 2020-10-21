@@ -1,0 +1,20 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper textarea {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+    margin: 5px 0;
+    outline: none;
+}
+
+.wrapper textarea:focus {
+    border-color: teal;
+ }
+
+.wrapper label {
+    color: gray;
+}

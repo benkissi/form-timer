@@ -1,0 +1,20 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper input {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+    margin: 5px 0;
+    outline: none;
+}
+
+.wrapper input:focus {
+   border-color: teal;
+}
+
+.wrapper label {
+    color: gray;
+}
