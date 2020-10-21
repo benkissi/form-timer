@@ -9,19 +9,20 @@ function App() {
   const [name, setName] = useState("");
   const [institution, setInstitution] = useState("");
   const [bio, setBio] = useState("");
+  const [disabled, setDisabled] = useState(true)
 
   const [duration, setDuration] = useState(0);
   const [timer, setTimer] = useState(null);
 
   const [formError, setError] = useState("");
 
-  useEffect(() => {
-    if (!timer) {
-      startTimer()
-    }
+  // useEffect(() => {
+  //   if (!timer) {
+  //     startTimer()
+  //   }
 
-    return () => clearInterval(timer);
-  }, [timer]);
+  //   return () => clearInterval(timer);
+  // }, [timer]);
 
   useEffect(() => {
     let timeOut;
@@ -62,6 +63,8 @@ function App() {
         setDuration((prevState) => prevState + 1);
       }, 1000)
     );
+
+    setDisabled(false)
   }
 
   const resetFields = () => {
@@ -69,13 +72,19 @@ function App() {
     setInstitution("");
     setBio("");
     setDuration(0);
+    setDisabled(true)
   };
 
   const handleSubmit = () => {
     const isValid = name && institution && bio;
 
+    if(disabled) {
+      setError("Start timer");
+      return;
+    }
+
     if (!isValid) {
-      setError("fill in all fields");
+      setError("Fill in all fields");
       return;
     }
 
@@ -94,18 +103,21 @@ function App() {
       <div className={styles.form}>
         <Input
           name="name"
+          disabled={disabled}
           label="Name"
           handleChange={onChangeHandler}
           value={name}
         />
         <Input
           name="institution"
+          disabled={disabled}
           label="Institution"
           handleChange={onChangeHandler}
           value={institution}
         />
         <TextArea
           name="bio"
+          disabled={disabled}
           label="Bio"
           handleChange={onChangeHandler}
           value={bio}
